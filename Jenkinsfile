@@ -10,7 +10,7 @@ pipeline {
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "172.16.3.116/repository/cicd/"
         NEXUS_REPOSITORY = "cicd"
-        NEXUS_CREDENTIAL_ID = "Jenkins-user"
+        NEXUS_CREDENTIAL_ID = "a"
 		
 		
 	}
