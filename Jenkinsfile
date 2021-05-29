@@ -19,6 +19,7 @@ pipeline {
       stage('Build') {
         steps {
 			 script {
+                sh 'ssh 172.16.3.116 -u root -p Kalam!#%'
 		        dockerImage = docker.build("my-image:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}")   	
                 echo 'Building...'
 		        docker.withRegistry( 'http://'+NEXUS_URL, NEXUS_CREDENTIAL_ID ){
