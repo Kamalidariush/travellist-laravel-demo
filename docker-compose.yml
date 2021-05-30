@@ -3,8 +3,8 @@ services:
   app:
     build:
       args:
-        user: jenkins
-        uid: 1000
+        user: ali
+        uid: 1003
       context: ./
       dockerfile: Dockerfile
     image: travellist
