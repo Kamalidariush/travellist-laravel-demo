@@ -1,5 +1,6 @@
 FROM php:7.4-fpm
-
+ARG user=ali
+ARG uid=1003
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
