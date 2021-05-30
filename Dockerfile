@@ -27,7 +27,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN echo $uid
 RUN echo $user
 RUN echo "salam"
-RUN useradd -G www-data,root -u $uid 
+RUN useradd -g www-data -u $uid 
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
