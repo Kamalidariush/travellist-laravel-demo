@@ -1,7 +1,7 @@
 FROM php:7.4-fpm
 # Arguments defined in docker-compose.yml
-ARG user1
-ARG uid1
+ARG user1=ali
+ARG uid1=1003
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
