@@ -1,9 +1,7 @@
 FROM php:7.4-fpm
-ARG user=ali
-ARG uid=1003
 # Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+ARG user1
+ARG uid1
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -28,7 +26,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN echo ${user}
 RUN echo ${user}
 RUN echo "salam ${user}"
-RUN useradd -G www-data,root -u  ${uid} -d /home/${user}  ${user}
+RUN useradd -G www-data,root -u  ${uid1} -d /home/${user1}  ${user}
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
