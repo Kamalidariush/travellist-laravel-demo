@@ -29,7 +29,6 @@ RUN echo "salam ${user1}"
 RUN useradd -G www-data,root -u  ${uid1} -d /home/${user1}  ${user1}
 RUN mkdir -p /home/$user1/.composer && \
     chown -R $user1:$user1 /home/$user1
-COPY . /var/www
 # Set working directory
 WORKDIR /var/www
 
