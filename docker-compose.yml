@@ -28,19 +28,7 @@ services:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
       - travellist
-
-  nginx:
-    image: nginx:alpine
-    container_name: travellist-nginx
-    restart: unless-stopped
-    ports:
-      - "8000:80"
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d
-    networks:
-      - travellist
-
+      
 networks:
   travellist:
     driver: bridge
