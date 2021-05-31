@@ -16,10 +16,11 @@ RUN apt-get update && apt-get install -y \
     unzip
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY start-apache /usr/local/bin
+RUN chmod +x /usr/local/bin/start-apache
 RUN a2enmod rewrite
 
 # Copy application source
-COPY src /var/www/
+COPY . /var/www/
 RUN chown -R www-data:www-data /var/www
 
 CMD ["start-apache"]
@@ -39,7 +40,6 @@ RUN mkdir -p /home/$user1/.composer && \
     chown -R $user1:$user1 /home/$user1
 
 # Set working directory
-COPY . /var/www
 WORKDIR /var/www
 EXPOSE 80
 USER $user1
