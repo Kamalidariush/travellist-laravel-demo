@@ -33,4 +33,5 @@ RUN mkdir -p /home/$user1/.composer && \
 # Set working directory
 COPY . /var/www
 WORKDIR /var/www
+EXPOSE 80
 USER $user1
