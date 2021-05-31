@@ -26,7 +26,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid1 -d /home/$user1 $user1
 RUN mkdir -p /home/$user1/.composer && \
-    chown -R $user1:$user1 /home/$use1r
+    chown -R $user1:$user1 /home/$user1
 
 # Set working directory
 WORKDIR /var/www
