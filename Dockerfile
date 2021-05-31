@@ -30,6 +30,7 @@ RUN mkdir -p /home/$user1/.composer && \
     chown -R $user1:$user1 /home/$user1
 
 # Set working directory
+COPY . /var/www
 WORKDIR /var/www
 RUN composer install
 RUN chmod 755 -R /storage/logs
