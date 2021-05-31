@@ -1,3 +1,5 @@
+ARG user1
+ARG uid1
 FROM php:7.4-fpm
 # Arguments defined in docker-compose.yml
 ARG user1
