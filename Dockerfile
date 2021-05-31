@@ -1,5 +1,3 @@
-Cracked by Go2Crck@TC for Http://TrainingCirlce.in
-
 version: "3.7"
 services:
   app:
