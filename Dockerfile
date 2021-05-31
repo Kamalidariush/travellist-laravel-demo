@@ -1,6 +1,6 @@
 ARG user1=ali
 ARG uid1=1003
-FROM php:7.4-fpm
+FROM php:7.4-apache
 # Arguments defined in docker-compose.yml
 ARG user1
 ARG uid1
@@ -13,8 +13,16 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    apache2
+    unzip
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY start-apache /usr/local/bin
+RUN a2enmod rewrite
+
+# Copy application source
+COPY src /var/www/
+RUN chown -R www-data:www-data /var/www
+
+CMD ["start-apache"]
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
