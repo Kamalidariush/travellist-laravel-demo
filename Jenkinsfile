@@ -19,11 +19,12 @@ pipeline {
       stage('Build') {
         steps {
 			 script {
-                sh 'docker-compose up -d'
-		        dockerImage = docker.build("my-image:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}")   	
-                echo 'Building...'
-		        docker.withRegistry( 'http://'+NEXUS_URL, NEXUS_CREDENTIAL_ID ){
-                dockerImage.push(DOCKER_TAG)
+                 echo 'Building...'
+                 sh 'docker-compose up -d'
+                 sh 'docker compose exec -it travellist-app_1 && compose update && php artisan key:generate && php artisan migrate --force'
+		         dockerImage = docker.build("travellist-app:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}")
+		         docker.withRegistry( 'http://'+NEXUS_URL, NEXUS_CREDENTIAL_ID ){
+                 dockerImage.push(DOCKER_TAG)
 		  }
 		  
         }
