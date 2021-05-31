@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    apache2
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -30,5 +31,6 @@ RUN mkdir -p /home/$user1/.composer && \
     chown -R $user1:$user1 /home/$user1
 
 # Set working directory
+COPY . /var/www
 WORKDIR /var/www
 USER $user1
