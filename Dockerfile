@@ -31,5 +31,9 @@ RUN mkdir -p /home/$user1/.composer && \
 
 # Set working directory
 WORKDIR /var/www
-
+RUN composer install
+RUN chmod 755 -R /storage/logs
+RUN php artisan key:generate
+RUN chmod 755 -R /storage/framework
+RUn php artisan migrate --force
 USER $user
