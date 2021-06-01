@@ -1,6 +1,6 @@
 ARG user1=ali
 ARG uid1=1003
-FROM  wyveo/nginx-php-fpm:php74
+FROM  php:7.4-fpm
 
 # Arguments defined in docker-compose.yml
 ARG user1
@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    nginx
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
