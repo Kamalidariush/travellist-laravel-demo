@@ -1,6 +1,6 @@
 ARG user1=ali
 ARG uid1=1003
-FROM nginx-php-fpm:php74
+FROM  wyveo/nginx-php-fpm:php74
 
 # Arguments defined in docker-compose.yml
 ARG user1
