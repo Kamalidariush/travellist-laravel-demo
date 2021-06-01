@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     nginx
 
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -30,3 +31,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 # Set working directory
 WORKDIR /var/www
+RUN mkdir /var/www/storage/logs
+RUN chown www-data storage/logs/
+RUN php artisan key:generate
+RUN chown www-data /var/www/storage/framework/views
+RUN rm /etc/nginx/sites-enabled/default
+RUN cp /etc/nginx/conf.d/travellist.conf  /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
+RUN service nginx restart
+
