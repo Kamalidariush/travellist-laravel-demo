@@ -34,14 +34,6 @@ services:
     networks:
       - travellist
 
-  nginx:
-    image: nginx:alpine
-    container_name: travellist-nginx
-    restart: unless-stopped
-    
-    networks:
-      - travellist
-
 networks:
   travellist:
     driver: bridge
