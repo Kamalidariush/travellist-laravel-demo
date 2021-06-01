@@ -1,6 +1,6 @@
 ARG user1=ali
 ARG uid1=1003
-FROM php:7.4-fpm
+FROM nginx-php-fpm:php74
 
 # Arguments defined in docker-compose.yml
 ARG user1
@@ -26,10 +26,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid1 -d /home/$user1 $user1
-RUN mkdir -p /home/$user1/.composer && \
-    chown -R $user1:$user1 /home/$user1
-
+COPY . /var/www
 # Set working directory
 WORKDIR /var/www
 
