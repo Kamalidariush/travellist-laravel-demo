@@ -30,5 +30,3 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 # Set working directory
 WORKDIR /var/www
-
-USER $user1
