@@ -38,5 +38,5 @@ RUN chown www-data /var/www/storage/framework/views
 RUN rm /etc/nginx/sites-enabled/default
 COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
-RUN service nginx restart
+RUN service nginx start
 
