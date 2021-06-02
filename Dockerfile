@@ -16,7 +16,11 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nginx
-
+RUN rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-available/default 
+COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
+COPY docker-compose/nginx/travellist.conf  /etc/nginx/conf.d/
+RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
