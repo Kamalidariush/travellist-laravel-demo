@@ -38,7 +38,7 @@ RUN mkdir /var/www/storage/logs
 RUN chown www-data storage/logs/
 RUN php artisan key:generate
 RUN chown www-data /var/www/storage/framework/views
-RUN service nginx start
+CMD ["nginx", "-g", "daemon off;"]
 
 
 
