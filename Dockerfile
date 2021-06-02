@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nginx
-
+RUN service nginx start
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -35,7 +35,5 @@ RUN mkdir /var/www/storage/logs
 RUN chown www-data storage/logs/
 RUN php artisan key:generate
 RUN chown www-data /var/www/storage/framework/views
-RUN rm /etc/nginx/sites-enabled/default
 COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
-RUN service nginx start
