@@ -12,7 +12,9 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     ports:
-      - "80:80"
+      - "8000:80"
+    volumes:
+      - ./docker-compose/nginx:/etc/nginx/conf.d
     networks:
       - travellist
 
