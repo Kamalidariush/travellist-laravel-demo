@@ -34,7 +34,6 @@ RUN mkdir /var/www/storage/logs
 RUN chown www-data storage/logs/
 RUN php artisan key:generate
 RUN chown www-data /var/www/storage/framework/views
-CMD ["nginx", "-g", "daemon off;"]
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-available/default 
 COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
