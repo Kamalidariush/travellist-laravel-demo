@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travellist-app
+  labels:
+    app: travellist-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: travellist-app
+  template:
+    metadata:
+      labels:
+        app: travellist-app
+    spec:
+      containers:
+      - name: travellist-app
+        image: travellist
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: Travellist-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: travellist-app-service
+spec:
+  selector:
+    app: travellist-app
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000

@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        env:
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: sql-root-username
+        - name: MYSQL_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: db-secret
+              key: sql-root-password
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: db-secret
+              key: sql-root-password
+        - name: MYSQL_DATABASE
+          valueFrom: 
+            secretKeyRef:
+              name: db-secret
+              key: sql-database
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        - name: mysql-host-path
+          mountPath: /docker-entrypoint-initdb.d/
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+      - name: mysql-host-path
+        configMap:
+        name: mysql-initdb-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+data:
+  initdb.sql: |
+    DROP TABLE IF EXISTS `places`;
+
+    CREATE TABLE `places` (
+      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+      `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+      `visited` tinyint(1) NOT NULL DEFAULT '0',
+      `lat` float(9,6) NOT NULL DEFAULT '0.00',
+      `lng` float(9,6) NOT NULL DEFAULT '0.00',
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+    INSERT INTO `places` (name, visited, lat, lng) VALUES ('Berlin',1,52.52,13.405),('Budapest',1,47.4979,19.0402),('Cincinnati',0,39.1031,-84.512),('Denver',0,39.7392,-104.99),('Helsinki',1,60.1699,24.9384),('Lisbon',1,38.7223,-9.13934),('Moscow',0,55.7558,37.6173),('Nairobi',0,-1.29207,36.8219),('Oslo',1,59.9139,10.7522),('Rio',1,-22.9068,-43.1729),('Tokyo',0,35.6895,139.692);
