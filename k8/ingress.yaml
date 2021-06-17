@@ -1,22 +1,19 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: 100m
-  labels:
-    app: travellist-app
   name: travellist-app
 spec:
   rules:
-    - host: app.com
-      http:
-        paths:
-          - travellist-app:
-              serviceName: travellist-app-service
-              servicePort: 80
-            path: /
+  - host: app.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: travellist-app-service
+            port:
+              number: 80
   # tls:
   #   - hosts:
   #       - yourdomain.com

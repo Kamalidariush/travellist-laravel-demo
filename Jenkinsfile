@@ -20,12 +20,12 @@ pipeline {
         steps {
 			 script {
                  echo 'Building...'
-                 sh 'docker-compose up -d --build'
-				 sh 'docker exec travellist-app  service nginx  start'
+                 //sh 'docker-compose up -d --build'
+				         //sh 'docker exec travellist-app  service nginx  start'
 
 		         dockerImage = docker.build("travellist-app:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}")
 		         docker.withRegistry( 'http://'+NEXUS_URL, NEXUS_CREDENTIAL_ID ){
-                 dockerImage.push(DOCKER_TAG)
+               dockerImage.push(DOCKER_TAG)
 		  }
 		  
         }

@@ -1,10 +1,6 @@
-ARG user1=ali
-ARG uid1=1003
 FROM  php:7.4-fpm
 
 # Arguments defined in docker-compose.yml
-ARG user1
-ARG uid1
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -33,9 +29,17 @@ COPY . /var/www
 WORKDIR /var/www
 RUN mkdir /var/www/storage/logs
 RUN chown www-data storage/logs/
+RUN chown -R www-data:www-data .
+RUN chgrp -R www-data storage bootstrap/cache
+RUN chmod -R ug+rwx storage bootstrap/cache
+RUN php artisan key:generate
+RUN php artisan cache:clear
+RUN php artisan config:clear
+RUN composer dump-autoload
 RUN php artisan key:generate
 RUN chown www-data /var/www/storage/framework/views
 COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-available/default 
+RUN service nginx start

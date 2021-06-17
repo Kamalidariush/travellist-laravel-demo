@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: travellist-config
+data:
+  user1: "ali"
+  uid1: "1003"
+  APP_NAME: "travellist"
+  APP_ENV: dev
+  APP_DEBUG: "false"
+  APP_URL: http://localhost
+  LOG_CHANNEL: stack
+  DB_CONNECTION: mysql
+  DB_HOST: db-service
+  DB_PORT: "3306"
+  DB_DATABASE: travellist
+  DB_USERNAME: travellist_user
+  DB_PASSWORD: password
+  BROADCAST_DRIVER: log
+  CACHE_DRIVER: file
+  QUEUE_CONNECTION: sync
+  SESSION_DRIVER: cookie
+  SESSION_LIFETIME: "120"
+  REDIS_HOST: 127.0.0.1
+  REDIS_PASSWORD: " "
+  REDIS_PORT: "6379"
+  MAIL_DRIVER: smtp
+  MAIL_HOST: smtp.mailtrap.io
+  MAIL_PORT: "2525"
