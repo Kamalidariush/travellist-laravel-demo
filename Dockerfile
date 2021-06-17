@@ -25,7 +25,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
 COPY . /var/www
-COPY entrypoint.sh /etc/entrypoint.sh
 # Set working directory
 WORKDIR /var/www
 RUN mkdir /var/www/storage/logs
@@ -42,5 +41,4 @@ COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-available/default 
-EXPOSE 80
-ENTRYPOINT ["/etc/entrypoint.sh"]
+CMD service nginx start
