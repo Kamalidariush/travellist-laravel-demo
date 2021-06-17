@@ -41,4 +41,4 @@ COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-available/default 
-CMD service nginx start
+CMD ["nginx", "-g", "daemon off;"]
