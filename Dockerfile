@@ -36,7 +36,6 @@ RUN php artisan key:generate
 RUN php artisan cache:clear
 RUN php artisan config:clear
 RUN composer dump-autoload
-RUN php artisan key:generate
 RUN chown www-data /var/www/storage/framework/views
 COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
