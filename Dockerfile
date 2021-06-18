@@ -43,5 +43,6 @@ RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
 RUN rm /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-available/default 
 COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
 EXPOSE 80
-CMD ["/start.sh"]
+ENTRYPOINT ["sh", "/start.sh"]
