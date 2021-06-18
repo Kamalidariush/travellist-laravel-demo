@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    nginx \
+    net-tools \
     vim
 
 # Clear cache
@@ -37,8 +37,8 @@ RUN php artisan cache:clear
 RUN php artisan config:clear
 RUN composer dump-autoload
 RUN chown www-data /var/www/storage/framework/views
-COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
-RUN rm /etc/nginx/sites-enabled/default
-RUN rm /etc/nginx/sites-available/default 
-CMD ["nginx", "-g", "daemon off;"]
+#COPY docker-compose/nginx/travellist.conf  /etc/nginx/sites-available/
+#RUN ln -s /etc/nginx/sites-available/travellist.conf  /etc/nginx/sites-enabled/
+#RUN rm /etc/nginx/sites-enabled/default
+#RUN rm /etc/nginx/sites-available/default 
+#CMD ["nginx", "-g", "daemon off;"]
