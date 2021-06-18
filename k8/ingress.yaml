@@ -13,7 +13,7 @@ spec:
           service:
             name: travellist-app-service
             port:
-              number: 9000
+              number: 80
   # tls:
   #   - hosts:
   #       - yourdomain.com
