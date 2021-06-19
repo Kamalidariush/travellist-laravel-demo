@@ -49,7 +49,7 @@ pipeline {
         echo 'Deploy_Dev'
         script{
                    def image_id = registry + "travellist-app:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}"
-                   sh "ansible-playbook  playbook.yml --extra-vars "image_id=${image_id} env=dev""
+                   sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
                }
      }
    }
