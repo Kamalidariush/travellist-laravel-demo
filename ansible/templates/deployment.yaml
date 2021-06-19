@@ -5,7 +5,7 @@ metadata:
   labels:
     app: travellist-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: travellist-app
@@ -16,12 +16,14 @@ spec:
     spec:
       containers:
       - name: travellist-app
-        image: travellist
+        image: "{{ image_id }}"
         ports:
-        - containerPort: 80
+          - containerPort: 80
         envFrom:
           - configMapRef:
-              name: Travellist-config
+              name: travellist-config
+      imagePullSecrets:
+        - name: nexus-docker
 ---
 apiVersion: v1
 kind: Service
@@ -30,7 +32,7 @@ metadata:
 spec:
   selector:
     app: travellist-app
-  type: LoadBalancer  
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 80

@@ -1,0 +1,5 @@
+[k8]
+172.16.3.117 ansible_user=toor
+
+[all:vars]
+env=prod

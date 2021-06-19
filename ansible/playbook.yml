@@ -1,0 +1,19 @@
+- hosts: all
+  vars_files: 
+    - "vars/{{ env }}.yml"
+  tasks:
+  - name: Deploy the service
+    k8s:
+      state: present
+      validate_certs: no
+      namespace: default
+      definition: "{{ lookup('template', 'templates/{{item}}.yaml') | from_yaml }}"
+      with_item:
+         - secret
+         - nexus-docker
+         - mysql-pv
+         - configmap
+         - deployment
+         - deploymentSQL
+         - ingress
+  
