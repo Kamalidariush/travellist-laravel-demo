@@ -4,7 +4,7 @@ def getdockertag(){
 pipeline {
    agent any
    environment {
-        registry= "172.16.3.116"
+        registry= "172.16.3.116/"
         DOCKER_TAG = getdockertag()
 		    NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
