@@ -4,7 +4,7 @@ def getdockertag(){
 pipeline {
    agent any
    environment {
-        registry= "172.16.3.116\"
+        registry= "172.16.3.116"
         DOCKER_TAG = getdockertag()
 		    NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
@@ -48,7 +48,7 @@ pipeline {
      steps {
         echo 'Deploy_Dev'
         script{
-                   def image_id = registry + "travellist-app:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}"
+                   def image_id = registry + "\"+ "travellist-app:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}"
                    sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
                }
      }
