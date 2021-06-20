@@ -52,7 +52,7 @@ pipeline {
                    //sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
                     dir("ansible") {
                         ansiblePlaybook installation: 'ansible', inventory: 'hosts-dev', playbook: 'playbook.yml', extraVars: [
-                          image_id: "${image_id}" env: "dev"
+                          image_id: "${image_id}" , env: "dev"
                         ]
                     }
                }
