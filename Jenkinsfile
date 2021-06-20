@@ -54,6 +54,7 @@ pipeline {
                         ansiblePlaybook installation: 'ansible', inventory: 'hosts-dev', playbook: 'playbook.yml', extraVars: [
                           image_id: "${image_id}"
                         ]
+                    }
                }
      }
    }
