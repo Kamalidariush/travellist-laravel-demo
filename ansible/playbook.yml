@@ -8,7 +8,7 @@
       validate_certs: no
       namespace: default
       definition: "{{ lookup('template', 'templates/{{item}}.yaml') | from_yaml }}"
-      with_item:
+      with_items:
          - secret
          - nexus-docker
          - mysql-pv
