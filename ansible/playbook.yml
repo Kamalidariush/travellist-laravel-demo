@@ -7,7 +7,7 @@
       state: present
       validate_certs: no
       namespace: default
-      definition: "{{ lookup('template', 'templates/{{item}}.yaml') | from_yaml }}"
+      definition: "{{ lookup('template', 'templates/{{ item }}.yaml') | from_yaml }}"
       with_items:
          - secret
          - nexus-docker
