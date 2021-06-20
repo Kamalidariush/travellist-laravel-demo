@@ -51,7 +51,9 @@ pipeline {
                    def image_id = registry + "travellist-app:${env.GIT_BRANCH}".replace("/",".") + "."+"${env.BUILD_ID}"
                    //sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
                     dir("ansible") {
-                        ansiblePlaybook installation: 'ansible', inventory: 'hosts-dev', playbook: 'playbook.yml', extraVars: 'image_id: ${image_id} env: env'
+                        ansiblePlaybook installation: 'ansible', inventory: 'hosts-dev', playbook: 'playbook.yml', extraVars: [
+                          image_id: "${image_id}" env: "dev"
+                        ]
                     }
                }
      }
