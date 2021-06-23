@@ -40,16 +40,40 @@
             definition: "{{ lookup('template', 'templates/mysql-pv.yaml') | from_yaml }}"
             validate_certs: no
             namespace: default
+        - name: Deploy the Mysql-pv2
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/mysql-pv2.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
         - name: Deploy the configmap
           k8s:
             state: present
             definition: "{{ lookup('template', 'templates/configmap.yaml') | from_yaml }}"
             validate_certs: no
             namespace: default
-        - name: Deploy the Deploy app
+        - name: Deploy the  app service
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/deploymentService.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the  app
           k8s:
             state: present
             definition: "{{ lookup('template', 'templates/deployment.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the sql service
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/deploymentSQLsvc.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the sql Configmap
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/deploymentSQLcfgmap.yaml') | from_yaml }}"
             validate_certs: no
             namespace: default
         - name: Deploy the Deploy sql
