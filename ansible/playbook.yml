@@ -2,63 +2,63 @@
   vars_files: 
     - "vars/{{ env }}.yml"
   tasks:
-     - name: Ansible copy directory to the remote server
-       copy:
-         src: ./templates
-         dest: /home/toor
-     - name: Deploy the secret
-       command: kubectl apply -f templates/secret.yaml
-     - name: Deploy the nexus-docker
-       command: kubectl apply -f templates/nexus-docker.yaml
-     - name: Deploy the mysql-pv
-       command: kubectl apply -f templates/mysql-pv.yaml
-     - name: Deploy the configmap
-       command: kubectl apply -f templates/configmap.yaml
-     - name: Deploy the deployment
-       command: kubectl apply -f templates/deployment.yaml
-     - name: Deploy the deploymentSQL
-       command: kubectl apply -f templates/deploymentSQL.yaml
-     - name: Deploy the ingress
-       command: kubectl apply -f templates/ingress.yaml
-  # - name: Deploy the secret
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/secret.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
-  # - name: Deploy the nexus
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/nexus-docker.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
-  # - name: Deploy the Mysql-pv
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/mysql-pv.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
-  # - name: Deploy the configmap
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/configmap.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
-  # - name: Deploy the Deploy app
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/deployment.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
-  # - name: Deploy the Deploy sql
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/deploymentSQL.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
-  # - name: Deploy the Ingress
-  #   k8s:
-  #     state: present
-  #     definition: "{{ lookup('template', 'templates/ingress.yaml') | from_yaml }}"
-  #     validate_certs: no
-  #     namespace: default
+    #  - name: Ansible copy directory to the remote server
+    #    copy:
+    #      src: ./templates
+    #      dest: /home/toor
+    #  - name: Deploy the secret
+    #    command: kubectl apply -f templates/secret.yaml
+    #  - name: Deploy the nexus-docker
+    #    command: kubectl apply -f templates/nexus-docker.yaml
+    #  - name: Deploy the mysql-pv
+    #    command: kubectl apply -f templates/mysql-pv.yaml
+    #  - name: Deploy the configmap
+    #    command: kubectl apply -f templates/configmap.yaml
+    #  - name: Deploy the deployment
+    #    command: kubectl apply -f templates/deployment.yaml
+    #  - name: Deploy the deploymentSQL
+    #    command: kubectl apply -f templates/deploymentSQL.yaml
+    #  - name: Deploy the ingress
+    #    command: kubectl apply -f templates/ingress.yaml
+        - name: Deploy the secret
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/secret.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the nexus
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/nexus-docker.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the Mysql-pv
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/mysql-pv.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the configmap
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/configmap.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the Deploy app
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/deployment.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the Deploy sql
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/deploymentSQL.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
+        - name: Deploy the Ingress
+          k8s:
+            state: present
+            definition: "{{ lookup('template', 'templates/ingress.yaml') | from_yaml }}"
+            validate_certs: no
+            namespace: default
